@@ -146,6 +146,10 @@ public class TcpConnector {
         }
 
         @Override
+        protected void onPong(ChannelHandlerContext ctx, FMessage msg) throws Exception {
+        }
+
+        @Override
         protected void onResponse(ChannelHandlerContext ctx, FMessage msg) throws Exception {
            TcpClient client = ctx.channel().attr(TcpClient.CLIENT).get();
            if(null == client) return;

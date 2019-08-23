@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.protobuf.MessageLite;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.ByteBufUtil;
 import io.netty.handler.codec.DecoderException;
 import io.netty.handler.codec.EncoderException;
 
@@ -229,9 +230,11 @@ public class FMTraits {
             }
 
             try {
-                res = prototype.getParserForType().parseFrom(content.array(),
-                        content.arrayOffset() + content.readerIndex(), content.readableBytes());
+                byte[] bytes = ByteBufUtil.getBytes(content, content.readerIndex(), content.readableBytes(), true);
+                int length = content.readableBytes();
+                res = prototype.getParserForType().parseFrom(bytes, 0, length);
             }catch (Exception e){
+                System.out.println(e);
                 throw new DecoderException(e.getMessage());
             }
 

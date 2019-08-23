@@ -6,6 +6,7 @@ package io.nettyex.tinytransport;
  */
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.protobuf.MessageLite;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -78,6 +79,8 @@ public class FMessage {
             str = str + " content:'"+(String)content+"'";
         }else if(FMTraits.JSON == contentType){
             str = str + " content: '" + ((JSONObject)content).toJSONString() + "'";
+        }else if(FMTraits.PROTOBUF == contentType){
+            str = str + " content: '" + ((MessageLite)content).toString() + "'";
         }
 
         return str;
