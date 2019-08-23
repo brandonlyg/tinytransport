@@ -1,0 +1,31 @@
+syntax = "proto3";
+package tinytransport;
+
+option java_package = "io.nettyex.tinytransport.test";
+
+enum Cmd{
+    INVALID = 0;
+
+    GET_PERSONINFO = 1;
+    GET_PERSONINFO_RES = 2;
+}
+
+message ProtoContent {
+    int32 cmd = 1;
+    int32 errCode = 2;
+    string errMsg = 3;
+
+    bytes data = 20;
+}
+
+message GetPersonInfoReq {
+    int32    area = 1;
+    string personId = 2;
+}
+
+message PersonInfoRes{
+    int32 area = 1;
+    string personId = 2;
+    string name = 3;
+    string interest = 4;
+}

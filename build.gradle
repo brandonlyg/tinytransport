@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group 'io.nettyex'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+
+    mavenLocal()
+    maven {
+        url "http://maven.aliyun.com/nexus/content/groups/public"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compile (
+            [group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'],
+            [group: 'com.alibaba', name:'fastjson', version: '1.2.29'],
+            [group: 'com.google.protobuf', name: 'protobuf-java', version: '3.6.0'],
+            [group: 'io.netty', name:'netty-all', version: '4.1.17.Final'],
+    )
+
+    testCompile (
+            [group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'],
+            [group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3']
+    )
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
