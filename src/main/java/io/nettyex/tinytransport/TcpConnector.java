@@ -112,7 +112,7 @@ public class TcpConnector {
     }
 
     @ChannelHandler.Sharable
-    protected class ClientHandler extends FrameMessageHandler {
+    protected class ClientHandler extends FMessageHandler {
         @Override
         public void channelActive(ChannelHandlerContext ctx) throws Exception {
             Channel chnl = ctx.channel();

@@ -6,7 +6,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.SocketChannel;
 import io.nettyex.tinytransport.FMTraits;
 import io.nettyex.tinytransport.FMessage;
-import io.nettyex.tinytransport.FrameMessageHandler;
+import io.nettyex.tinytransport.FMessageHandler;
 import io.nettyex.tinytransport.TcpServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +47,7 @@ public class TcpServerTest {
     }
 
     @ChannelHandler.Sharable
-    private static class ServerHandler extends FrameMessageHandler {
+    private static class ServerHandler extends FMessageHandler {
         @Override
         public void channelActive(ChannelHandlerContext ctx) throws Exception {
             log.info("channel connected: {}", ctx.channel().remoteAddress().toString());

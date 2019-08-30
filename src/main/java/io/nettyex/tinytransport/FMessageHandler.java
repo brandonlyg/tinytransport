@@ -12,7 +12,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 /**
  * 处理FrameMessage消息的ChannelInboundHandler
  */
-public class FrameMessageHandler extends SimpleChannelInboundHandler<FMessage> {
+public class FMessageHandler extends SimpleChannelInboundHandler<FMessage> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, FMessage msg) throws Exception {
@@ -30,22 +30,55 @@ public class FrameMessageHandler extends SimpleChannelInboundHandler<FMessage> {
         }
     }
 
+    /**
+     * 收到PING
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     protected void onPing(ChannelHandlerContext ctx, FMessage msg) throws Exception{
         FMessage pong = FMessage.buildPong(msg);
         ctx.channel().writeAndFlush(pong);
     }
 
+    /**
+     * 收到PONG
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     protected void onPong(ChannelHandlerContext ctx, FMessage msg) throws Exception{
         ctx.fireChannelRead(msg);
     }
+
+    /**
+     * 收到REQUEST
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     protected void onRequest(ChannelHandlerContext ctx, FMessage msg) throws Exception{
         ctx.fireChannelRead(msg);
 
     }
+
+    /**
+     * 收到RESPONSE
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     protected void onResponse(ChannelHandlerContext ctx, FMessage msg) throws Exception{
         ctx.fireChannelRead(msg);
 
     }
+
+    /**
+     * 收到PUSH
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     protected void onPush(ChannelHandlerContext ctx, FMessage msg) throws Exception{
         ctx.fireChannelRead(msg);
     }

@@ -9,7 +9,7 @@ import io.netty.handler.codec.DecoderException;
 import io.netty.handler.codec.EncoderException;
 
 /**
- * FMessage消息特征接口,根据不同的contentType进行Frame和Frame直接的转换
+ * FMessage消息特征接口,根据不同的contentType进行Frame和FMessage之间的转换
  */
 public interface FMessageTrait {
 
@@ -19,6 +19,19 @@ public interface FMessageTrait {
      */
     int getContentType();
 
+    /**
+     * 把FMessage转换成Frame
+     * @param fmsg
+     * @return
+     * @throws EncoderException
+     */
     Frame encode(FMessage fmsg) throws EncoderException;
+
+    /**
+     * 把Frame转换成FMessage
+     * @param frame
+     * @return
+     * @throws DecoderException
+     */
     FMessage decode(Frame frame) throws DecoderException;
 }
